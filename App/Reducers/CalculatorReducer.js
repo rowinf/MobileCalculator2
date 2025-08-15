@@ -1,5 +1,5 @@
 
-import math from 'mathjs'
+import {evaluate} from 'mathjs'
 
 import Types from '../Actions/Types'
 import CalcUtils from '../Lib/CalcUtils'
@@ -96,9 +96,9 @@ export const buildExpression = (state, action) => {
   switch (action.payload) {
     case CalcUtils.EQUALS:
       try {
-        return math.format(math.eval(state.expression), {precision: 14})
+        return evaluate(state.expression);
       } catch (e) {
-        return '0'
+        console.error(e);
       }
     case CalcUtils.AC:
       return '0'
